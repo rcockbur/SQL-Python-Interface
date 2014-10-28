@@ -1,9 +1,9 @@
-import cx_oracle
+import cx_Oracle
 
-con = cx_Oracle.connect('vanbelle/hogwarts77@gwynne.cs.ualberta.ca:1521:CRS[:1521]/CRS')
+con = cx_Oracle.connect('vanbelle/c1234567@gwynne.cs.ualberta.ca:1521:CRS[:1521]/CRS')
 
 cur = con.cursor()
-
+#drops tables
 cur.execute("""
 DROP TABLE not_allowed;
 DROP TABLE doctor;
@@ -12,6 +12,7 @@ DROP TABLE can_conduct;
 DROP TABLE medical_lab;
 DROP TABLE test_type;""")
 
+#creates tables
 cur.execute("""CREATE TABLE patient (
     health_care_no int,
     name           varchar(100) NOT NULL,
@@ -80,6 +81,7 @@ CREATE TABLE test_record (
     FOREIGN KEY (patient_no) REFERENCES patient
 );""")
 
+#populates tables
 cur.execute("""insert into patient values(121212, 'Peter Capaldi', '12 Gallifrey',to_date('1958-04-11', 'YYYY-MM-DD'), '121-2121');
 
 insert into patient values(111111, 'Matt Smith', '11 Gallifrey',to_date('1982-10-28','YYYY-MM-DD') , '111-1111');
