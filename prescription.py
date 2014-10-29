@@ -13,6 +13,7 @@ print(test_ids)
 
 test_id = 0
 
+#could we just increment the id from 1 until they stop adding ID's to make it faster?
 while test_id == 0:
     t = random.randrange(1000000,9999999)
     if t not in test_ids:
