@@ -7,24 +7,12 @@ con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
 
 cur = con.cursor()
 
-cur.execute("""SELECT distinct test.id 
-               FROM test_record;""")
-test_ids = cur.fetchall()
-print(test_ids)
+#health_care_number = input('Enter the health care number of the patient: ')
+#employee_number = input('Enter the employee number of the doctor: ')
 
-test_id = 0
-
-#could we just increment the id from 1 until they stop adding ID's to make it faster?
-while test_id == 0:
-    t = random.randrange(1000000,9999999)
-    if t not in test_ids:
-        test_id = t
-
-#employee_no = input('Enter your employee number: ')
-#employee_name = input('Enter your name: ')
-#test_name = input('Enter the name of the test: ')
-#pat_name = input("Enter the patient's name: ")
-#pat_no = input("Enter the patient's health care number: ")
+#lab_name = input('Enter your lab name: ')
+#test_date = input('Enter the date of the test: ')
+#test_result = input('Enter the result of the test: ')
 
 #cur.execute(""" INSERT INTO test_record 
                 #VALUES(:test_id, :type_id, :patient_no, :employee_no, 
