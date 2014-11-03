@@ -1,0 +1,1 @@
+#This component is used to enter the information of a new patient or to update the information of an existing patient. All the information about a patient, except the health_care_no for an existing patient, may be updated.
