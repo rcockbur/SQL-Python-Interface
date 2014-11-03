@@ -1,5 +1,6 @@
 $ cat .gitignore
 
-# Can ignore specific files
+# Can ignore specific files and file/directory prefixes
 1.txt~
 *~
+*_
