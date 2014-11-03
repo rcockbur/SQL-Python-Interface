@@ -6,7 +6,7 @@ con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
 
 cur = con.cursor()
 
-cur.execute("""SELECT distinct test_id FROM test_record""")
+cur.execute("SELECT distinct test_id FROM test_record")
 test_ids = cur.fetchall()
 print(test_ids)
 for item in test_ids:
