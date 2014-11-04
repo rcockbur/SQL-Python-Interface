@@ -3,6 +3,7 @@
 import random
 import cx_Oracle
 
+
 con = cx_Oracle.connect("msumner/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
 
 cur = con.cursor()
@@ -30,4 +31,5 @@ cur.execute(INSERT INTO test_record
                 :medical_lab, :result, :prescribe_date, :test_date,{"test_id":test_id, "type_id":type_id, "patient_no":patient_no, "employee_no":employee_no, 
                 "medical_lab":medical_lab, "result":NULL, "prescribe_date":prescribe_date, "test_date":test_date})
 
+con.commit()
 con.close()
