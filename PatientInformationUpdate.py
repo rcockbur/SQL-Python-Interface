@@ -3,7 +3,7 @@
 import cx_Oracle
 
 con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
-cur = con.cursor()
+curs = con.cursor()
 
 quote = """'"""
 
@@ -15,7 +15,7 @@ def addPatient():
 	year = quote + input('Enter patients year of birth:') + '-'
 	month = input('Enter patients month of birth (01-12):') + '-'
 	day = input('Enter patients day of birth:') + quote
-	birthday =  '(' + year + month + day + ',' + 'YYYY-MM-DD' + ')' + ','
+	birthday =  '(' + year + month + day + ',' + quote + 'YYYY-MM-DD' + quote + ')' + ','
 
 	phone = quote + input('Enter patients phone number:') + quote
 
@@ -25,12 +25,27 @@ def addPatient():
 
 	command = s0 + hcn + name + address + s1 + birthday + phone + s2
 	print(command)
-	cur.execute(command)
+	curs.execute(command)
+
+
+
+
+def updatePatient():
+	patient = input('Enter patients healthcare number:')
+	curs.execute("SELECT health_care_no FROM patient")
+	row = curs.fetchone()
+	while row:
+		print(row)
+		row = curs.fetchone()
+		# finish here			
+
+
 
 print('Patient Update')
 print('1. Add new patient')
 print('2. Update existing patient')
 i = input('Please select an option (1/2):')
+
 
 while(1):
 	if i == '1':
@@ -38,12 +53,13 @@ while(1):
 		print(i)
 		break;
 	elif i == '2':
-		#doSomething
+		updatePatient()
 		print(i)
 		break;
 	else: 
 		i = input('Invalid entry, select option (1/2):')
 
+con.commit()
 curs.close()
 con.close()
 print('complete patient info update')
