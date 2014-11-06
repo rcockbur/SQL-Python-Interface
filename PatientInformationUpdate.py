@@ -4,7 +4,6 @@ import cx_Oracle
 
 con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
 curs = con.cursor()
-
 quote = """'"""
 
 def addPatient():
@@ -24,42 +23,113 @@ def addPatient():
 	s2 = ')'
 
 	command = s0 + hcn + name + address + s1 + birthday + phone + s2
-	print(command)
 	curs.execute(command)
+	con.commit()
 
+def displayRow(row):
+	print('Info for patient ' + str(row[0]))
+	print('Name:         ' + row[1])
+	print('Address:      ' + row[2])
+	print('Birthday:     ' + str(row[3].year) +' '+ str(row[3].month) +' '+ str(row[3].day))
+	print('Phone Number: ' + row[4])
+	print('')
 
+def displayUpdateOptions(row):
+	while(1):
+		print('Options:')
+		print('1. Update name')
+		print('2. Update address')
+		print('3. Update birthday')
+		print('4. Update phone number')
+		print('5. Done')
+		i = input('Please select an option (1-5):')
+		print('')
 
+		if i == '1':
+			i = input('Enter name: ')
+			command = 'UPDATE Patient SET name=' + quote + i + quote +' WHERE health_care_no=' + str(row[0])
+			curs.execute(command)
+			con.commit()
+			print('Name updated')
+			print('')
+
+		elif i == '2':
+			i = input('Enter address: ')
+			command = 'UPDATE Patient SET address=' + quote + i + quote +' WHERE health_care_no=' + str(row[0])
+			curs.execute(command)
+			con.commit()
+			print('Address updated')
+			print('')
+
+		elif i == '3':
+			y = input('Enter year: ')
+			m = input('Enter month: ')
+			d = input('Enter day: ')
+			birthday = '(' + quote + y + '-' + m + '-' + d + quote + ','
+			temp = 'to_date' + birthday + quote + 'YYYY-MM-DD' + quote + ')'
+			command = 'UPDATE Patient SET birth_day=' + temp +' WHERE health_care_no=' + str(row[0])
+			print(command)
+			curs.execute(command)
+			con.commit()
+			print('Birthday updated')
+			print('')
+	
+		elif i == '4':
+			i = input('Enter phone number: ')
+			command = 'UPDATE Patient SET phone=' + quote + i + quote +' WHERE health_care_no=' + str(row[0])
+			curs.execute(command)
+			con.commit()
+			print('Phone number updated')
+			print('')
+
+		elif i == '5':
+			break
+		else: 
+			i = input('Invalid entry')
+
+		#curs = con.cursor()
 
 def updatePatient():
-	patient = input('Enter patients healthcare number:')
-	curs.execute("SELECT health_care_no FROM patient")
+	patientNo = input('Enter patients healthcare number:')
+	print('')
+	curs.execute("SELECT * FROM patient")
+	print(curs)
 	row = curs.fetchone()
+	patientFound = False
 	while row:
-		print(row)
+		#print(row)
+		
+		if str(row[0]) == patientNo:
+			patientFound = True
+			displayRow(row)
+			#saveCurs = curs
+			displayUpdateOptions(row)
+			#curs = saveCurs
+		print(curs)
 		row = curs.fetchone()
-		# finish here			
+	if patientFound == False:
+		print("Patient not found")
+			
 
-
-
-print('Patient Update')
-print('1. Add new patient')
-print('2. Update existing patient')
-i = input('Please select an option (1/2):')
 
 
 while(1):
+	print('Options:')
+	print('1. Add new patient')
+	print('2. Update existing patient')
+	print('3. Done')
+
+	i = input('Please select an option (1-3):')
+
 	if i == '1':
 		addPatient()
-		print(i)
-		break;
 	elif i == '2':
 		updatePatient()
-		print(i)
-		break;
+	elif i == '3':
+		break
 	else: 
-		i = input('Invalid entry, select option (1/2):')
+		print('Invalid entry')
 
-con.commit()
 curs.close()
 con.close()
 print('complete patient info update')

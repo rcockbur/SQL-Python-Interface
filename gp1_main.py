@@ -17,7 +17,7 @@ for create_table in table_creation:
     curs.execute(create_table)
     
 #opens file of populate table statements
-g = open('a2_data.sql')
+g = open('a2-data.sql')
 data_sql = g.read()
 populate_table = data_sql.split(';')
 
