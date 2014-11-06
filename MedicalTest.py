@@ -7,57 +7,38 @@ import cx_Oracle
 con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
 cur = con.cursor()
 
-
-
-health_care_number = int(input('Enter the health care number of the patient: '))
-employee_number = int(input('Enter the employee number of the doctor: '))
-
-patient = "select patient_no from test_record"
+#Get a list of the patient number and test type for each result that has not been completed.
+patient = "SELECT patient_no, test_name FROM test_record tr, test_type tt WHERE tr.type_id = tt.type_id AND result IS NULL"
 cur.execute(patient)
-pat_rows = cur.fetchall()
-pat = []
-pat_list = []
-for i in pat_rows:
-	for j in i:
-		if j == ',' or j == '(' or j == ')':
-			continue
-		else:
-			pat.append(j)
-	pat_list.append(int(j))
+rows = cur.fetchall()
 
-'''SQL CODE:
-select patient_no, test_name from test_record tr, test_type tt
-where tr.type_id = tt.type_id and
-result IS NULL;
-'''
+again = True
+while again:
+	patient_no = int(input('Enter the health care number of the patient: '))
+	test_type = str(input('Enter the test type of the test: '))
+	combined = (patient_no , test_type)
 
-doctor = "select employee_no from test_record"
-cur.execute(doctor)
-doc_rows = cur.fetchall()
-doc = []
-doc_list = []
-for i in doc_rows:
-	for j in i:
-		if j == ',' or j == '(' or j == ')':
-			continue
-		else:
-			doc.append(j)
-	doc_list.append(int(j))
+	valid = False
+	for i in rows:
+		print(i)
+		if i == combined:
+			valid = True
 
-for i in pat_list:
-	if i == health_care_number:
-		print("Yes")
+	if not valid:
+		yn = input("This record is not in the database, would you like to try again? (y/n) ")
+		if yn == "n":
+			again = False
+			exit()
+	if valid:
+		again = False
 
-'''
 lab_name = input('Enter your lab name: ')
-test_date = input('Enter the date of the test: ')
+test_id = input('Enter the Id of the test ')
 test_result = input('Enter the result of the test: ')
-'''
-'''
-cur.execute(INSERT INTO test_record 
-                VALUES(:test_id, :type_id, :patient_no, :employee_no, 
-                :medical_lab, :result, :prescribe_date, :test_date,{"test_id":test_id, "type_id":int(type_id), "patient_no":int(patient_no), "employee_no":int(employee_no), 
-                "medical_lab":medical_lab, "result":NULL, "prescribe_date":prescribe_date, "test_date":test_date})
-'''
+
+
+cur.execute("UPDATE test_record SET result = :result WHERE test_id = :test_id", {'result' : str(test_result), 'test_id' :int(test_id)})
+
+
 con.commit()
 con.close()
