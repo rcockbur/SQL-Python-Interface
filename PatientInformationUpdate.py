@@ -92,26 +92,21 @@ def displayUpdateOptions(row):
 def updatePatient():
 	patientNo = input('Enter patients healthcare number:')
 	print('')
-	curs.execute("SELECT * FROM patient")
-	print(curs)
+	curs.execute("SELECT * FROM patient WHERE health_care_no = %s" % (patientNo,))
+	#print(curs)
 	row = curs.fetchone()
-	patientFound = False
-	while row:
-		#print(row)
-		
-		if str(row[0]) == patientNo:
-			patientFound = True
-			displayRow(row)
-			#saveCurs = curs
-			displayUpdateOptions(row)
-			#curs = saveCurs
-		print(curs)
-		row = curs.fetchone()
+	if row == None:
+		patientFound = False
+	else:
+		patientFound = True
+		displayRow(row)
+		#saveCurs = curs
+		displayUpdateOptions(row)
+		#curs = saveCurs
+	#print(curs)
 	if patientFound == False:
 		print("Patient not found")
 			
-
-
 
 while(1):
 	print('Options:')
@@ -133,8 +128,3 @@ while(1):
 curs.close()
 con.close()
 print('complete patient info update')
-
-
-
-
-		
