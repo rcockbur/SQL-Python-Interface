@@ -87,23 +87,17 @@ def displayUpdateOptions(row):
 		else: 
 			i = input('Invalid entry')
 
-		#curs = con.cursor()
-
 def updatePatient():
 	patientNo = input('Enter patients healthcare number:')
 	print('')
 	curs.execute("SELECT * FROM patient WHERE health_care_no = %s" % (patientNo,))
-	#print(curs)
 	row = curs.fetchone()
 	if row == None:
 		patientFound = False
 	else:
 		patientFound = True
 		displayRow(row)
-		#saveCurs = curs
 		displayUpdateOptions(row)
-		#curs = saveCurs
-	#print(curs)
 	if patientFound == False:
 		print("Patient not found")
 			
