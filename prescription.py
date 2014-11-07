@@ -1,4 +1,5 @@
-#Prescription module
+#Prescription module: allows a doctor to enter a prescription for a patient
+#returns a conflict error if that test is not allowed to be taken
 import random
 import cx_Oracle
 
@@ -64,21 +65,33 @@ tests = curs.fetchall()
 type_ids = [i[0] for i in tests] 
 tests = [i[1] for i in tests] 
 
-print('These are the available tests')
-for i in tests:
-    print(i)
+curs.execute("SELECT distinct type_ids FROM not_allowed WHERE health_care_no = %s" % (patient_no,))
+t = curs.fetchall()
+not_allowed = [i[0] for i in t]    
 #find a valid test name/number
 while True:
-    test_name = input("Enter the name of the test you wish to prescribe: ")
-    if test_name in tests:
+    while True:
+        test_name = input("Enter the name of the test you wish to prescribe: ")
+        if test_name in tests:
+            break
+        cont = input("That test name is not on file, would you like to try again (Y/N): ")          
+        if cont == 'N':
+            exit()     
+    i = tests.index(test_name)
+    type_id = type_ids[i]
+    if type_id in not_allowed:
+        print("this patient is not allowed to take this test.")
+        while type_id in not_allowed:
+            cont = input("Would you like to prescribe another test for this patient?(Y/N): ")
+            if cont == 'Y':
+                break
+            elif cont =='N':
+                exit()
+            else:
+                print("invalid answer")
+                continue
+    else:
         break
-    cont = input("That test name is not on file, would you like to try again (Y/N): ")          
-    if cont == 'N':
-        exit()     
-        
-#determine the corresponding test id that goes with the given test name
-i = tests.index(test_name)
-type_id = type_ids[i]
 
 #executes update of prescription info 
 curs.execute("INSERT INTO test_record VALUES(:test_id, :type_id, :patient_no, :employee_no, NULL, NULL, SYSDATE, NULL)",
