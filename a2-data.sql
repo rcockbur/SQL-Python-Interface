@@ -54,14 +54,6 @@ insert into can_conduct values('St. Mungos Hospital', 000001);
 
 insert into can_conduct values('Tardis', 333331);
 
-insert into can_conduct values('Tardis', 333332);
-
-insert into not_allowed values(666666, 333332);
-
-insert into not_allowed values(777777, 333332);
-
-insert into not_allowed values(888888, 333332);
-
 insert into not_allowed values(090909, 5);
 
 insert into not_allowed values(101010, 5);

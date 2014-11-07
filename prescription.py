@@ -65,7 +65,7 @@ tests = curs.fetchall()
 type_ids = [i[0] for i in tests] 
 tests = [i[1] for i in tests] 
 
-curs.execute("SELECT distinct type_ids FROM not_allowed WHERE health_care_no = %s" % (patient_no,))
+curs.execute("SELECT distinct type_id FROM not_allowed WHERE health_care_no = %s" % (patient_no,))
 t = curs.fetchall()
 not_allowed = [i[0] for i in t]    
 #find a valid test name/number
