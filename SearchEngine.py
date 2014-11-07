@@ -53,7 +53,6 @@ def searchDoctor():
 		print('Test Name: ' + row[2])
 		print('Prescribe Date: ' + str(row[3].year) +'-'+ str(row[3].month) +'-'+ str(row[3].day))
 		print('')	
-	pass 
 
 def alarmingAge():
 	pass
