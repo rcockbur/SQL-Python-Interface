@@ -1,5 +1,7 @@
 import sys
 import gp1_main
+import prescription
+
 while(1):
 	print('')
 	print('Main Menu')
@@ -12,8 +14,7 @@ while(1):
 	i = input('Select Option 1-6:')
 	while(1):
 		if i == '1':
-			#doSomething
-			print(i)
+			p = prescription.Prescription()
 			break;
 		elif i == '2':
 			#doSomething
