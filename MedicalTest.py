@@ -1,6 +1,6 @@
 #Medical Test module
 
-import random
+
 import cx_Oracle
 
 class MedicalTest(object):
