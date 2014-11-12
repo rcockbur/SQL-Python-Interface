@@ -67,9 +67,9 @@ class Prescription(object):
         self.type_ids = [i[0] for i in self.tests] 
         self.tests = [i[1] for i in self.tests] 
 
-        self.curs.execute("SELECT distinct type_id FROM not_allowed WHERE health_care_no = %s" % (patient_no,))
-        self.t = curs.fetchall()
-        self.not_allowed = [i[0] for i in t]    
+        self.curs.execute("SELECT distinct type_id FROM not_allowed WHERE health_care_no = %s" % (self.patient_no,))
+        self.t = self.curs.fetchall()
+        self.not_allowed = [i[0] for i in self.t]    
 #find a valid test name/number
         while True:
             while True:
