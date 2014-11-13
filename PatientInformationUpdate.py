@@ -4,7 +4,9 @@ import cx_Oracle
 class Update(object):
 	def __init__(self):
 		super(Update, self).__init__()
-		self.con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
+		self.username = input("Enter your Username: ")
+		self.password = input("Enter your Password: ")
+		self.con = cx_Oracle.connect(self.username +"/"+self.password+"@gwynne.cs.ualberta.ca:1521/CRS")
 		self.curs = self.con.cursor()
 		self.quote = """'"""
 

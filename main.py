@@ -5,6 +5,9 @@ import MedicalTest
 import PatientInformationUpdate
 import SearchEngine
 
+username = input("Enter your Username: ")
+password = input("Enter your Password: ")
+
 while(1):
 	print('')
 	print('Main Menu')
@@ -16,21 +19,21 @@ while(1):
 	i = input('Select Option (1-5):')
 	print('')
 
-	while(1):
+	while(1):	
 		if i == '1':
-			p = prescription.Prescription()
+			p = prescription.Prescription(username,password)
 			break;
 
 		elif i == '2':
-			mt = MedicalTest.MedicalTest()
+			mt = MedicalTest.MedicalTest(username,password)
 			break;
 
 		elif i == '3':
-			u = PatientInformationUpdate.Update()
+			u = PatientInformationUpdate.Update(username,password)
 			break;
 
 		elif i == '4':
-			se = SearchEngine.SearchEngine()
+			se = SearchEngine.SearchEngine(username,password)
 			break;
 
 		elif i == '5':
@@ -38,4 +41,5 @@ while(1):
 
 		else: 
 			i = input('Invalid Entry, Select Option 1-6:')
+
 
