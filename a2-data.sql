@@ -16,6 +16,10 @@ insert into patient values(222222, 'Poppy Pomfrey', 'Hogwarts', to_date('1941-02
 
 insert into patient values(11, 'Joe Boring', 'Edmonton', to_date('1987-03-10' , 'YYYY-MM-DD'), '123-4567');
 
+insert into patient values(12, 'Old but healthy', 'Edmonton', to_date('1801-03-10' , 'YYYY-MM-DD'), '123-0000');
+
+insert into patient values(13, 'Old sicko', 'Edmonton', to_date('1807-03-10' , 'YYYY-MM-DD'), '123-0000');
+
 insert into doctor values(1112, 'Edmonton Hospital', '456-8790', '546-7854', 11);
 
 insert into doctor values(2222, 'Infirmary in Hogwarts', '222-2222', '222-2222', 222222);
@@ -90,13 +94,13 @@ insert into test_record values(444440, 222221, 666666, 2222, 'Hogwarts Infirmary
 
 insert into test_record values(444441, 222221, 777777, 2222, 'Hogwarts Infirmary', 'normal', to_date('2013-01-11', 'YYYY-MM-DD'), to_date('2013-10-31', 'YYYY-MM-DD'));
 
-insert into test_record values(444442, 333332, 090909, 0909, 'Tardis', 'normal', to_date('2012-04-11', 'YYYY-MM-DD'), to_date('2010-04-10', 'YYYY-MM-DD'));
+insert into test_record values(444442, 333332, 13, 0909, 'Tardis', 'abnormal', to_date('2012-04-11', 'YYYY-MM-DD'), to_date('2010-04-10', 'YYYY-MM-DD'));
 
 insert into test_record values(444443, 333332, 101010, 1010, 'Tardis', 'normal', to_date('1995-04-11', 'YYYY-MM-DD'), to_date('2011-04-11', 'YYYY-MM-DD'));
 
 insert into test_record values(44441, 333331, 090909, 0909, 'Tardis', 'normal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2010-12-25', 'YYYY-MM-DD'));
 
-insert into test_record values(44442, 333331, 101010, 1010, 'Tardis', 'normal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2011-12-25', 'YYYY-MM-DD'));
+insert into test_record values(44442, 333331, 101010, 1010, 'Tardis', 'abnormal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2011-12-25', 'YYYY-MM-DD'));
 
 insert into test_record values(44443, 333331, 111111, 1111, 'Tardis', 'normal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2012-12-25', 'YYYY-MM-DD'));
 
@@ -106,16 +110,28 @@ insert into test_record values(444445, 333332, 111111, 1111, 'Tardis', 'normal',
 
 insert into test_record values(444449, 333332, 121212, 1212, 'Tardis', 'normal', to_date('2011-04-11', 'YYYY-MM-DD'), to_date('2013-07-13', 'YYYY-MM-DD'));
 
-insert into test_record values(444447, 333331, 101010, 1010, 'Tardis', 'normal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2013-12-25', 'YYYY-MM-DD'));
+insert into test_record values(444447, 333331, 101010, 1010, 'Tardis', 'abnormal', to_date('1965-04-11', 'YYYY-MM-DD'), to_date('2013-12-25', 'YYYY-MM-DD'));
 
-insert into test_record values(9, 1, 11, 1010, 'St. Mungos Hospital', 'normal', to_date('2013-03-11', 'YYYY-MM-DD'), to_date('2013-11-11', 'YYYY-MM-DD'));
+insert into test_record values(9, 1, 11, 1010, 'St. Mungos Hospital', 'abnormal', to_date('2013-03-11', 'YYYY-MM-DD'), to_date('2013-11-11', 'YYYY-MM-DD'));
 
-insert into test_record values(789, 6, 777777, 1112, 'Edmonton Hospital', 'normal', to_date('2013-05-11', 'YYYY-MM-DD'), to_date('2013-11-11', 'YYYY-MM-DD'));
+insert into test_record values(789, 6, 222222, 1112, 'Edmonton Hospital', 'abnormal', to_date('2013-05-11', 'YYYY-MM-DD'), to_date('2013-11-11', 'YYYY-MM-DD'));
 
 insert into test_record values(765, 1, 777777, 1112, 'Edmonton Hospital', 'normal', to_date('2013-05-11', 'YYYY-MM-DD'), to_date('2014-01-11', 'YYYY-MM-DD'));
 
 insert into test_record values(2, 1, 777777, 1112, 'Edmonton Hospital', 'normal', to_date('2013-05-11', 'YYYY-MM-DD'), to_date('2014-03-11', 'YYYY-MM-DD'));
 
-insert into test_record values(3, 1, 777777, 1112, 'Edmonton Hospital', 'normal', to_date('2013-06-11', 'YYYY-MM-DD'), to_date('2013-12-29', 'YYYY-MM-DD'));
+insert into test_record values(3, 1, 777777, 1112, 'Edmonton Hospital', 'abnormal', to_date('2013-06-11', 'YYYY-MM-DD'), to_date('2013-12-29', 'YYYY-MM-DD'));
 
 insert into test_record values(4, 1, 666666, 1112, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(5, 222221, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(6, 333331, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(7, 333332, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(8, 1, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(10, 5, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));
+
+insert into test_record values(11, 6, 12, 1111, 'Edmonton Hospital', 'normal', to_date('2013-07-11', 'YYYY-MM-DD'), to_date('2013-12-11', 'YYYY-MM-DD'));

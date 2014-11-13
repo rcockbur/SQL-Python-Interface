@@ -1,6 +1,6 @@
 #used to perform searches
 import cx_Oracle
-
+quote = """'"""
 class SearchEngine(object):
 	def __init__(self):
 		super(SearchEngine, self).__init__()
@@ -85,6 +85,53 @@ class SearchEngine(object):
 			print('')	
 
 	def alarmingAge(self):
-		pass
+		testType = quote + input('Which test are inquiring about?') + quote
+		print('')
+		
+		self.curs.execute('SELECT * FROM test_type WHERE test_name = %s' % (testType,))
+
+		row = self.curs.fetchone()
+		type_id = row[0]
+		#print('type is ' + str(type_id))
+
+		f = open('engine.sql')
+		statementsFile = f.read()
+		statements = statementsFile.split(';')
+
+		try: self.curs.execute(statements[0])
+		except: pass
+		self.curs.execute(statements[1])
+		self.curs.execute(statements[2])
+
+		results = self.curs.fetchall()
+		print('The following patients should schedule a test')
+		n = 'Name:   '
+		a = 'Adress: '
+		p = 'Phone:  '
+		for result in results:
+			#print(result[3])
+			if result[3] == type_id:
+				print(n + result[0])
+				print(a + result[1])
+				print(p + result[2])
+				print('')
+		#print(x)
+
+		#for statement in statements:
+		#	if statement == '\n':
+		#		continue
+		#	print(statement)
+		#	self.curs.execute(statement)
+		#	x = self.curs.fetchall()
+		#	print('')
+		#	print(x)
+
+
+		#print(statements[1])
+		#self.curs.execute(statements[1])
+		#self.curs.execute(statements[2])
+		#print(statements[2])
+		#x = self.curs.fetchall()
+		#print(x)
 
 
