@@ -4,11 +4,9 @@ import random
 import cx_Oracle
 
 class Prescription(object):
-    def __init__(self):
+    def __init__(self, username, password):
         super(Prescription, self).__init__()
-        self.username = input("Enter your Username: ")
-        self.password = input("Enter your Password: ")
-        self.con = cx_Oracle.connect(self.username +"/"+self.password+"@gwynne.cs.ualberta.ca:1521/CRS")
+        self.con = cx_Oracle.connect(username +"/"+password+"@gwynne.cs.ualberta.ca:1521/CRS")
         self.curs = self.con.cursor()
 
         #get a list of all the test_ids currently in use

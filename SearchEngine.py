@@ -2,9 +2,9 @@
 import cx_Oracle
 quote = """'"""
 class SearchEngine(object):
-	def __init__(self):
+	def __init__(self, username, password):
 		super(SearchEngine, self).__init__()
-		self.con = cx_Oracle.connect("vanbelle/c1234567@gwynne.cs.ualberta.ca:1521/CRS")
+		self.con = cx_Oracle.connect(username +"/"+password+"@gwynne.cs.ualberta.ca:1521/CRS")
 		self.curs = self.con.cursor()
 
 
@@ -85,14 +85,23 @@ class SearchEngine(object):
 			print('')	
 
 	def alarmingAge(self):
-		testType = quote + input('Which test are inquiring about?') + quote
-		print('')
-		
+		statement = "SELECT test_name FROM test_type"
+		self.curs.execute(statement)
+		validTypes = self.curs.fetchall()
+		print(validTypes)
+		validTypes = [i[0] for i in validTypes] 
+
+		while(1):
+			i = input('Which test are inquiring about?')
+			print('')
+			if i in validTypes:
+				break
+			print('Invalid Entry')
+		testType = quote + i + quote 
 		self.curs.execute('SELECT * FROM test_type WHERE test_name = %s' % (testType,))
 
 		row = self.curs.fetchone()
 		type_id = row[0]
-		#print('type is ' + str(type_id))
 
 		f = open('engine.sql')
 		statementsFile = f.read()
@@ -109,29 +118,14 @@ class SearchEngine(object):
 		a = 'Adress: '
 		p = 'Phone:  '
 		for result in results:
-			#print(result[3])
+
 			if result[3] == type_id:
 				print(n + result[0])
 				print(a + result[1])
 				print(p + result[2])
-				print('')
-		#print(x)
 
-		#for statement in statements:
-		#	if statement == '\n':
-		#		continue
-		#	print(statement)
-		#	self.curs.execute(statement)
-		#	x = self.curs.fetchall()
-		#	print('')
-		#	print(x)
+		print('End of patients')
 
 
-		#print(statements[1])
-		#self.curs.execute(statements[1])
-		#self.curs.execute(statements[2])
-		#print(statements[2])
-		#x = self.curs.fetchall()
-		#print(x)
 
 

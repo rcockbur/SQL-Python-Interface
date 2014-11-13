@@ -7,6 +7,7 @@ import SearchEngine
 
 username = input("Enter your Username: ")
 password = input("Enter your Password: ")
+setup = gp1_main.gp1_main(username, password)
 
 while(1):
 	print('')
