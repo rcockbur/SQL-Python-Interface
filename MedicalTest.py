@@ -3,9 +3,7 @@
 import cx_Oracle
 
 class MedicalTest(object):
-	def __init__(self):
-		username = input("Enter your Username: ")
-		password = input("Enter your Password: ")
+	def __init__(self,username,password):
 		super(MedicalTest, self).__init__()
 		con = cx_Oracle.connect(username +"/"+password+"@gwynne.cs.ualberta.ca:1521/CRS")
 		cur = con.cursor()
@@ -25,7 +23,7 @@ class MedicalTest(object):
 					valid = True
 
 			if not valid:
-				yn = input("This record is not in the database, would you like to try again? (y/n) ")
+				yn = input("Invalid Entry. Would you like to try again? (y/n) ")
 				if yn == "n":
 					again = False
 					return
